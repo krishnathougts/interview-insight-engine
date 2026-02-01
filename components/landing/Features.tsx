@@ -1,38 +1,167 @@
 "use client";
 
-import { Container, SimpleGrid, Card, Text, Title } from "@mantine/core";
+import {
+  Container,
+  SimpleGrid,
+  Title,
+  Text,
+  Card,
+  Group,
+  Button,
+  Box,
+} from "@mantine/core";
+import Link from "next/link";
+import {
+  IconBolt,
+  IconTarget,
+  IconTrendingUp,
+  IconShield,
+  IconFileText,
+  IconChevronRight,
+} from "@tabler/icons-react";
 
 const features = [
   {
-    title: "Analyze Your Performance",
+    icon: IconBolt,
+    color: "blue",
+    title: "Instant Feedback",
     description:
-      "Understand how your answers were evaluated and where you lost points.",
-  },
-  { 
-    title: "Identify Your Weaknesses",
-    description:
-      "Find skill gaps, communication issues, and technical blind spots.",
+      "No more waiting days for vague recruiter emails. Get detailed, actionable feedback within seconds of submission.",
   },
   {
-    title: "Get Actionable Advice",
+    icon: IconTarget,
+    color: "orange",
+    title: "Skill Gap Identification",
     description:
-      "Receive clear next steps to improve before your next interview.",
+      "Pinpoint exactly which technical concepts or behavioral traits are holding you back from the offer letter.",
+  },
+  {
+    icon: IconTrendingUp,
+    color: "teal",
+    title: "Progress Tracking",
+    description:
+      "Visualize your improvement over time with detailed charts tracking your confidence and technical scores.",
+  },
+  {
+    icon: IconShield,
+    color: "violet",
+    title: "Secure & Private",
+    description:
+      "Your interview data is sensitive. We use enterprise-grade encryption to ensure your career history stays private.",
+  },
+  {
+    icon: IconFileText,
+    color: "pink",
+    title: "Role Specific Models",
+    description:
+      "Whether you are a developer, designer, or product manager, our AI adapts its criteria to your specific job role.",
   },
 ];
 
 export function FeaturesSection() {
   return (
-    <Container size="lg" py={60}>
-      <SimpleGrid cols={{ base: 1, md: 3 }} spacing="lg">
-        {features.map((feature) => (
-          <Card key={feature.title} shadow="sm" padding="lg" withBorder>
-            <Title order={4}>{feature.title}</Title>
-            <Text c="dimmed" mt="sm">
-              {feature.description}
+    <Box id="features" py={80}>
+      <Container size="xl" px="md">
+        <Group justify="space-between" align="flex-end" mb={64} wrap="wrap" gap="lg">
+          <Box maw={600}>
+            <Title order={2} size="2.25rem" mb="md">
+              Powerful Features for Job Seekers
+            </Title>
+            <Text c="dimmed" size="lg">
+              Everything you need to stop guessing and start improving your
+              interview performance.
             </Text>
+          </Box>
+          <Button
+            component={Link}
+            href="/login"
+            variant="subtle"
+            color="blue"
+            rightSection={<IconChevronRight size={20} />}
+          >
+            Start Analyzing Now
+          </Button>
+        </Group>
+
+        <SimpleGrid cols={{ base: 1, md: 2, lg: 3 }} spacing="lg">
+          {features.map(({ icon: Icon, color, title, description }) => (
+            <Card
+              key={title}
+              shadow="sm"
+              padding="xl"
+              radius="lg"
+              withBorder
+              style={{
+                transition: "all 0.3s",
+                cursor: "default",
+              }}
+              className="feature-card"
+            >
+              <Box
+                w={48}
+                h={48}
+                mb="lg"
+                style={{
+                  backgroundColor: `var(--mantine-color-${color}-1)`,
+                  borderRadius: 12,
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+                  color: `var(--mantine-color-${color}-6)`,
+                }}
+              >
+                <Icon size={24} />
+              </Box>
+              <Title order={3} size="h4" mb="sm">
+                {title}
+              </Title>
+              <Text c="dimmed" size="sm" lh={1.6}>
+                {description}
+              </Text>
+            </Card>
+          ))}
+
+          <Card
+            component={Link}
+            href="/login"
+            padding="xl"
+            radius="lg"
+            style={{
+              backgroundColor: "var(--mantine-color-blue-6)",
+              color: "white",
+              display: "flex",
+              flexDirection: "column",
+              justifyContent: "center",
+              alignItems: "center",
+              textAlign: "center",
+              textDecoration: "none",
+              cursor: "pointer",
+              transition: "background-color 0.2s",
+            }}
+          >
+            <Title order={3} size="h4" mb="xs" c="white">
+              Ready to improve?
+            </Title>
+            <Text c="blue.1" mb="lg" size="sm">
+              Join thousands of candidates getting hired today.
+            </Text>
+            <Box
+              w={48}
+              h={48}
+              style={{
+                backgroundColor: "white",
+                color: "var(--mantine-color-blue-6)",
+                borderRadius: "50%",
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+              }}
+            >
+              <IconChevronRight size={24} />
+            </Box>
           </Card>
-        ))}
-      </SimpleGrid>
-    </Container>
+        </SimpleGrid>
+      </Container>
+    </Box>
   );
 }
